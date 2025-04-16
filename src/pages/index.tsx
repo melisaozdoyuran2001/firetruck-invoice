@@ -24,6 +24,7 @@ export default function Home() {
     setError(null);
     
     try {
+      //fetch api endpoint
       const res = await fetch('https://garage-backend.onrender.com/getListing', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
