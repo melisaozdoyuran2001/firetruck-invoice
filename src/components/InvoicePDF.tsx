@@ -38,20 +38,27 @@ const styles = StyleSheet.create({
 
 export default function EnhancedInvoicePDF({ data }) {
   const invoiceNumber = `INV-${new Date().getFullYear()}-${data?.id?.substring(0, 8)?.toUpperCase() || 'TEMP'}`;
-  const today = new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
+  const today = new Date().toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  });
   const sellingPrice = data?.sellingPrice || 70000;
   const taxRate = 0.07;
   const taxAmount = sellingPrice * taxRate;
   const totalAmount = sellingPrice + taxAmount;
-  const formattedCreationDate = data?.createdAt ? new Date(data.createdAt).toLocaleDateString() : 'N/A';
+  const formattedCreationDate = data?.createdAt
+    ? new Date(data.createdAt).toLocaleDateString()
+    : 'N/A';
   const firstImageUrl = data?.imageUrls?.[0];
 
   return (
     <Document>
       <Page size="A4" style={styles.page}>
+        {/* Watermark */}
         <Text style={styles.watermark}>OFFICIAL</Text>
 
-        {/* Header Section */}
+        {/* Header */}
         <View style={styles.headerContainer}>
           <View style={styles.headerLogoText}>
             <Image src="/logo.png" style={styles.logoImage} />
@@ -61,6 +68,7 @@ export default function EnhancedInvoicePDF({ data }) {
           </View>
         </View>
 
+        {/* Invoice Details */}
         <View style={styles.invoiceDetailsContainer}>
           <View style={styles.invoiceNumberSection}>
             <Text style={styles.sectionTitle}>Invoice Information</Text>
@@ -75,51 +83,129 @@ export default function EnhancedInvoicePDF({ data }) {
           </View>
         </View>
 
-        {firstImageUrl && <Image src={firstImageUrl} style={styles.vehicleImage} />}
+        {/* Vehicle Image */}
+        {firstImageUrl && (
+          <Image src={firstImageUrl} style={styles.vehicleImage} />
+        )}
 
         <View style={styles.divider} />
 
+        {/* Vehicle Details */}
         <View style={styles.vehicleInfoContainer}>
           <Text style={styles.sectionTitle}>Vehicle Details</Text>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Vehicle:</Text><Text style={styles.vehicleInfoValue}>{data?.listingTitle || '2022 Crestline CCL150 E-350'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Brand:</Text><Text style={styles.vehicleInfoValue}>{data?.itemBrand || 'Ford'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Year:</Text><Text style={styles.vehicleInfoValue}>{data?.itemAge || '2022'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Mileage:</Text><Text style={styles.vehicleInfoValue}>{data?.mileage?.toLocaleString() || '120,068'} miles</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Engine:</Text><Text style={styles.vehicleInfoValue}>7.3L V8 Gas Engine</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Drivetrain:</Text><Text style={styles.vehicleInfoValue}>4X2 Drivetrain</Text></View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Vehicle:</Text>
+            <Text style={styles.vehicleInfoValue}>
+              {data?.listingTitle || '2022 Crestline CCL150 E-350'}
+            </Text>
+          </View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Brand:</Text>
+            <Text style={styles.vehicleInfoValue}>
+              {data?.itemBrand || 'Ford'}
+            </Text>
+          </View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Year:</Text>
+            <Text style={styles.vehicleInfoValue}>
+              {data?.itemAge || '2022'}
+            </Text>
+          </View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Mileage:</Text>
+            <Text style={styles.vehicleInfoValue}>
+              {data?.mileage?.toLocaleString() || '120,068'} miles
+            </Text>
+          </View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Engine:</Text>
+            <Text style={styles.vehicleInfoValue}>7.3L V8 Gas Engine</Text>
+          </View>
+
+          <View style={styles.vehicleInfoRow}>
+            <Text style={styles.vehicleInfoKey}>Drivetrain:</Text>
+            <Text style={styles.vehicleInfoValue}>4X2 Drivetrain</Text>
+          </View>
         </View>
 
+        {/* Description */}
         <View style={styles.descriptionContainer}>
           <Text style={styles.sectionTitle}>Vehicle Description</Text>
-          <Text style={styles.descriptionText}>{data?.listingDescription || 'This ambulance is in great condition. Runs and operates with no issues. Our service department has inspected the vehicle and we\'ve confirmed no issues. Please reach out with any questions or offers.'}</Text>
-        </View>
-
-        <View style={styles.divider} />
-
-        <View style={styles.pricingContainer}>
-          <Text style={styles.sectionTitle}>Pricing Details</Text>
-          <View style={styles.pricingRow}><Text>Base Price:</Text><Text>${sellingPrice?.toLocaleString()}</Text></View>
-          <View style={styles.pricingRow}><Text>Tax (7%):</Text><Text>${taxAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text></View>
-          <View style={styles.totalRow}><Text>Total:</Text><Text>${totalAmount.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</Text></View>
-        </View>
-
-        <View style={styles.signatureContainer}>
-          <View style={styles.signatureSection}><Text style={styles.sectionTitle}>Seller Signature</Text><Text style={styles.signatureLine}>Date: _________________</Text></View>
-          <View style={styles.signatureSection}><Text style={styles.sectionTitle}>Buyer Signature</Text><Text style={styles.signatureLine}>Date: _________________</Text></View>
-        </View>
-
-        <View style={styles.termsContainer}>
-          <Text style={styles.termsTitle}>Terms & Conditions:</Text>
-          <Text style={styles.termsText}>
-            1. This invoice represents an offer to sell the described vehicle and is valid for 30 days from the date of issue.
-            2. All sales are final. Vehicle is sold as-is with no warranties expressed or implied unless otherwise stated.
-            3. Payment must be received in full before vehicle release.
-            4. Buyer is responsible for all applicable taxes, registration fees, and transfer costs.
-            5. Seller has confirmed the vehicle operates with no issues through service department inspection.
+          <Text style={styles.descriptionText}>
+            {data?.listingDescription ||
+              `This ambulance is in great condition. Runs and operates with no issues. Our service department has inspected the vehicle and we've confirmed no issues. Please reach out with any questions or offers.`}
           </Text>
         </View>
 
-        <Text style={styles.footer}>www.withgarage.com | Generated on {today}</Text>
+        <View style={styles.divider} />
+
+        {/* Pricing */}
+        <View style={styles.pricingContainer}>
+          <Text style={styles.sectionTitle}>Pricing Details</Text>
+
+          <View style={styles.pricingRow}>
+            <Text>Base Price:</Text>
+            <Text>${sellingPrice.toLocaleString()}</Text>
+          </View>
+
+          <View style={styles.pricingRow}>
+            <Text>Tax (7%):</Text>
+            <Text>
+              ${taxAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </Text>
+          </View>
+
+          <View style={styles.totalRow}>
+            <Text>Total:</Text>
+            <Text>
+              ${totalAmount.toLocaleString(undefined, {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2,
+              })}
+            </Text>
+          </View>
+        </View>
+
+        {/* Signatures */}
+        <View style={styles.signatureContainer}>
+          <View style={styles.signatureSection}>
+            <Text style={styles.sectionTitle}>Seller Signature</Text>
+            <Text style={styles.signatureLine}>Date: _________________</Text>
+          </View>
+          <View style={styles.signatureSection}>
+            <Text style={styles.sectionTitle}>Buyer Signature</Text>
+            <Text style={styles.signatureLine}>Date: _________________</Text>
+          </View>
+        </View>
+
+        {/* Terms */}
+        <View style={styles.termsContainer}>
+          <Text style={styles.termsTitle}>Terms & Conditions:</Text>
+          <Text style={styles.termsText}>
+            1. This invoice represents an offer to sell the described vehicle and
+            is valid for 30 days from the date of issue.
+            {'\n'}2. All sales are final. Vehicle is sold as-is with no warranties
+            expressed or implied unless otherwise stated.
+            {'\n'}3. Payment must be received in full before vehicle release.
+            {'\n'}4. Buyer is responsible for all applicable taxes, registration
+            fees, and transfer costs.
+            {'\n'}5. Seller has confirmed the vehicle operates with no issues
+            through service department inspection.
+          </Text>
+        </View>
+
+        {/* Footer */}
+        <Text style={styles.footer}>
+          www.withgarage.com | Generated on {today}
+        </Text>
       </Page>
     </Document>
   );

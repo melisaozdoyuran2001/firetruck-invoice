@@ -6,7 +6,7 @@ export default function Home() {
   const [url, setUrl] = useState('');
   const [listingData, setListingData] = useState(null);
   const [loading, setLoading] = useState(false);
-  const [step, setStep] = useState(1); // Track user progress
+  const [step, setStep] = useState(1); 
 
   const extractUUID = (url) => {
     const parts = url.split('-');
@@ -17,7 +17,6 @@ export default function Home() {
   const fetchListing = async () => {
     const uuid = extractUUID(url);
     if (!uuid) {
-      // Show a nicer error
       return setError('Please enter a valid Garage listing URL');
     }
   
@@ -38,7 +37,7 @@ export default function Home() {
         setError("No listing found. Please check the URL and try again.");
       } else {
         setListingData(listing);
-        setStep(2); // Move to download step
+        setStep(2);// go to download step
       }
     } catch (err) {
       console.error(err);
