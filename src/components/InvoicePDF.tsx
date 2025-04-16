@@ -238,7 +238,7 @@ export default function EnhancedInvoicePDF({ data }) {
 
           {data?.tankSize && (
             <View style={styles.vehicleInfoRow}>
-              <Text style={styles.vehicleInfoKey}>Tank Size:</Text>
+              <Text style={styles.vehicleInfoKey}>Tank Sizew:</Text>
               <Text style={styles.vehicleInfoValue}>
                 {data.tankSize.toLocaleString()}
               </Text>
