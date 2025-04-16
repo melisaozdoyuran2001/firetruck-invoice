@@ -23,7 +23,6 @@ Firetruck Invoice Generator
 
 ```bash
 git clone https://github.com/melisaozdoyuran2001/firetruck-invoice.git
-cd firetruck-invoice
 npm install
 npm run dev
 ```
