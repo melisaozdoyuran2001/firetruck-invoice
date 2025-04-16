@@ -205,11 +205,97 @@ export default function EnhancedInvoicePDF({ data }) {
 
         <View style={styles.vehicleInfoContainer}>
           <Text style={styles.sectionTitle}>Vehicle Details</Text>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Vehicle:</Text><Text style={styles.vehicleInfoValue}>{data?.listingTitle || 'N/A'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Brand:</Text><Text style={styles.vehicleInfoValue}>{data?.itemBrand || 'N/A'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Year:</Text><Text style={styles.vehicleInfoValue}>{data?.itemAge || 'N/A'}</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Mileage:</Text><Text style={styles.vehicleInfoValue}>{data?.mileage?.toLocaleString() || 'N/A'} miles</Text></View>
-          <View style={styles.vehicleInfoRow}><Text style={styles.vehicleInfoKey}>Tank Size:</Text><Text style={styles.vehicleInfoValue}>{data?.tankSize?.toLocaleString() || 'N/A'} </Text></View>
+
+          {data?.listingTitle && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Vehicle:</Text>
+              <Text style={styles.vehicleInfoValue}>{data.listingTitle}</Text>
+            </View>
+          )}
+
+          {data?.itemBrand && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Brand:</Text>
+              <Text style={styles.vehicleInfoValue}>{data.itemBrand}</Text>
+            </View>
+          )}
+
+          {data?.itemAge && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Year:</Text>
+              <Text style={styles.vehicleInfoValue}>{data.itemAge}</Text>
+            </View>
+          )}
+
+          {data?.mileage && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Mileage:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.mileage.toLocaleString()} miles
+              </Text>
+            </View>
+          )}
+
+          {data?.tankSize && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Tank Size:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.tankSize.toLocaleString()}
+              </Text>
+            </View>
+          )}
+
+          {data?.pumpSize && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Pump Size:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.pumpSize.toLocaleString()} GPM
+              </Text>
+            </View>
+          )}
+
+          {data?.itemHeight && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Height:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.itemHeight.toLocaleString()} inches
+              </Text>
+            </View>
+          )}
+
+          {data?.itemWidth && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Width:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.itemWidth.toLocaleString()} inches
+              </Text>
+            </View>
+          )}
+
+          {data?.itemLength && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Length:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.itemLength.toLocaleString()} inches
+              </Text>
+            </View>
+          )}
+
+          {data?.itemWeight && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>Weight:</Text>
+              <Text style={styles.vehicleInfoValue}>
+                {data.itemWeight.toLocaleString()} lbs
+              </Text>
+            </View>
+          )}
+
+          {data?.vin && (
+            <View style={styles.vehicleInfoRow}>
+              <Text style={styles.vehicleInfoKey}>VIN:</Text>
+              <Text style={styles.vehicleInfoValue}>{data.vin}</Text>
+            </View>
+          )}
         </View>
 
         <View style={styles.descriptionContainer}>
