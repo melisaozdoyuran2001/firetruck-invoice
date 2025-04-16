@@ -35,4 +35,4 @@ npm run dev
 
 ---
 
-Made with love by Melisa Ozdoyuran
+Made by Melisa Ozdoyuran
