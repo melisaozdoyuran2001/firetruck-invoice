@@ -1,5 +1,5 @@
 # firetruck-invoice  
-Garage Take-Home Test – Firetruck Invoice Generator
+Firetruck Invoice Generator
 
 ### Built With
 
