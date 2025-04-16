@@ -31,6 +31,7 @@ export default function Home() {
       });
       
       const data = await res.json();
+      // console.log(data)
       const listing = data.result?.listing;
       
       if (!listing) {
