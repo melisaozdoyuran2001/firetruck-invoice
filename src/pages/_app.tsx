@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>Firetruck Invoice</title>
-        <link rel="icon" href="/favicon.ico" />
+       
       </Head>
       <Component {...pageProps} />
     </>

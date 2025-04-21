@@ -288,7 +288,7 @@ export default function Home() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-6 text-center">
-            <p className="text-sm text-gray-400">© {new Date().getFullYear()} Garage. All rights reserved.</p>
+        
           </div>
         </div>
       </footer>
